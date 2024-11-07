@@ -1,0 +1,47 @@
+#define GREEN_LED_PIN 6     
+#define YELLOW_LED_PIN 7  
+#define RED_LED_PIN 8     
+
+void setup() {
+  Serial.begin(9600);           
+  pinMode(GREEN_LED_PIN, OUTPUT); 
+  pinMode(YELLOW_LED_PIN, OUTPUT);
+  pinMode(RED_LED_PIN, OUTPUT);
+
+  Serial.println("Enter 'b' to blink green, 'g' for green on, 'y' for yellow on, 'r' for red on.");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char command = Serial.read();  
+   
+    digitalWrite(GREEN_LED_PIN, LOW);
+    digitalWrite(YELLOW_LED_PIN, LOW);
+    digitalWrite(RED_LED_PIN, LOW);
+
+    if (command == 'b') {
+      
+      Serial.println("Blinking green LED...");
+      for (int i = 0; i < 5; i++) { 
+        digitalWrite(GREEN_LED_PIN, HIGH);
+        delay(500);
+        digitalWrite(GREEN_LED_PIN, LOW);
+        delay(500);
+      }
+    } else if (command == 'g') {
+      
+      Serial.println("Green LED illuminated.");
+      digitalWrite(GREEN_LED_PIN, HIGH);
+    } else if (command == 'y') {
+     
+      Serial.println("Yellow LED illuminated.");
+      digitalWrite(YELLOW_LED_PIN, HIGH);
+    } else if (command == 'r') {
+      
+      Serial.println("Red LED illuminated.");
+      digitalWrite(RED_LED_PIN, HIGH);
+    } else {
+      Serial.println("Invalid command. Use 'b', 'g', 'y', or 'r'.");
+    }
+  }
+}
