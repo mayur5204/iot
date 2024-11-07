@@ -1,0 +1,45 @@
+
+
+#define RED_LED_PIN 9     
+#define GREEN_LED_PIN 10   
+#define BLUE_LED_PIN 11   
+
+#define RED_POT_PIN A2     
+#define GREEN_POT_PIN A0   
+#define BLUE_POT_PIN A1    
+void setup() {
+  
+  pinMode(RED_LED_PIN, OUTPUT);
+  pinMode(GREEN_LED_PIN, OUTPUT);
+  pinMode(BLUE_LED_PIN, OUTPUT);
+
+  
+  Serial.begin(9600);
+}
+
+void loop() {
+  
+  int redValue = analogRead(RED_POT_PIN);
+  int greenValue = analogRead(GREEN_POT_PIN);
+  int blueValue = analogRead(BLUE_POT_PIN);
+
+  
+  redValue = map(redValue, 0, 1023, 0, 255);
+  greenValue = map(greenValue, 0, 1023, 0, 255);
+  blueValue = map(blueValue, 0, 1023, 0, 255);
+
+  
+  analogWrite(RED_LED_PIN, redValue);
+  analogWrite(GREEN_LED_PIN, greenValue);
+  analogWrite(BLUE_LED_PIN, blueValue);
+
+  
+  Serial.print("Red: ");
+  Serial.print(redValue);
+  Serial.print(" Green: ");
+  Serial.print(greenValue);
+  Serial.print(" Blue: ");
+  Serial.println(blueValue);
+
+  delay(100); 
+}
