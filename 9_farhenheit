@@ -1,0 +1,41 @@
+#define TEMP_PIN A0  
+
+
+float maxTemperatureF = -999.0;  
+float minTemperatureF = 999.0;   
+void setup() {
+  Serial.begin(9600);  
+  Serial.println("Reading temperature values...");
+}
+
+void loop() {
+  
+
+  
+  float celsius =  map(((analogRead(TEMP_PIN) - 20) * 3.04), 0, 1023, -40, 125);
+
+
+ 
+  float temperatureF =(celsius*1.8) + 32;
+
+  
+  if (temperatureF > maxTemperatureF) {
+    maxTemperatureF = temperatureF;
+  }
+
+ 
+  if (temperatureF < minTemperatureF) {
+    minTemperatureF = temperatureF;
+  }
+
+  
+  Serial.print("Current Temperature: ");
+  Serial.print(temperatureF);
+  Serial.print(" °F  |  Max Temperature: ");
+  Serial.print(maxTemperatureF);
+  Serial.print(" °F  |  Min Temperature: ");
+  Serial.print(minTemperatureF);
+  Serial.println(" °F");
+
+  delay(1000);  // Wait for a second before the next reading
+}
