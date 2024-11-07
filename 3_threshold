@@ -1,0 +1,21 @@
+int buzzerPin = 8;
+int Celsius = 0;
+
+void setup()
+{
+  pinMode(INPUT, A0);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  Celsius = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125);
+  if(Celsius >= 35 ){
+  	tone(buzzerPin, 100);
+    delay(2000);
+  }
+  else{
+  	noTone(buzzerPin);
+    delay(2000);
+  }
+}
